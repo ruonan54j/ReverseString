@@ -9,14 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReverseController {
 
-    //reverse a string passed by URL
+    /** 
+    * @param  string path variable passed in through url
+    * @return if string is not empty, returns the input string in reverse
+    * @throws RuntimeException if string is empty 
+    */
     @GetMapping(path = "{string}")
     public String reverseString(@PathVariable("string") String string){
-        if(string.trim().length() == 0) {
+        String trimString = string.trim();
+
+        if(trimString.length() == 0) {
             throw new RuntimeException("String can not be empty");
         }
 
-        return new StringBuilder(string).reverse().toString();
+        return new StringBuilder(trimString).reverse().toString();
     }
 
 }
